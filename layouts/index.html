@@ -24,29 +24,16 @@
 
                     {{ if isset .Site.Params "latestpostcount" }}
                         <div class="mx-0 mx-md-4 posts">
-                            {{ $nbPosts := len (where .Site.RegularPages "Section" "blog") }}
+                    {{ $blogLocation := .Site.Params.blog_content_type_name }}
+                    {{ $nbPosts := len (where .Site.RegularPages "Section" $blogLocation) }}
 
                             {{ if gt $nbPosts 0 }}
                                 <div class="page-heading">{{ i18n "latest_posts" }}</div>
                                 <ul class="px-0">
-                                    {{ range (first .Site.Params.latestpostcount (where .Site.RegularPages "Section" "blog")).GroupByDate "Jan, 2006" "desc" }}
-                                        <li class="groupby">{{ .Key }}</li>
-                                        {{ range sort .Pages "Date" "desc" }}
-                                            {{ partial "list" . }}
-                                        {{ end }}
-                                    {{ end }}
-                                </ul>
+                        {{ range (first .Site.Params.latestpostcount (where .Site.RegularPages "Section" $blogLocation)).GroupByDate "Jan, 2006" "desc" }}
 
                                 {{ if gt $nbPosts .Site.Params.latestpostcount }}
-                                    <a href="./blog/" class="font-italic mt-4 see-more">{{ i18n "see_more" }}</a>
-                                {{ end }}
-                            {{ end }}
-                        </div>
-                    {{ end }}
-                </div>
-            </div>
-        </div>
-    </div>
+                    <a href="./{{ $blogLocation }}/" class="font-italic mt-4 see-more">{{ i18n "see_more" }}</a>
 
     {{ partial "footer" . }}
 {{ end }}
