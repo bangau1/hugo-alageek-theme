@@ -39,6 +39,9 @@
     {{ if .Site.Params.highlightjs }}
         <link rel="stylesheet" href="{{ .Site.BaseURL }}css/highlight.css" />
     {{ end }}
+    {{ if .Site.Params.prismjs }}
+    <link rel="stylesheet" href="/css/prism.css" />
+    {{ end }}
 
     {{ if .Site.Params.progressively }}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/progressively/1.2.5/progressively.min.css" integrity="sha256-xbqLYBMsjpuCihs+3Fgp/MFMtPdo2SWKoOjEWOqR4X0=" crossorigin="anonymous" />
@@ -68,6 +71,9 @@
                 hljs.initHighlighting();
             }, true);
         </script>
+    {{ end }}
+    {{ if .Site.Params.prismjs }}
+    <script src="/js/prism.js"></script>
     {{ end }}
 
     {{ if .Site.Params.progressively }}
